@@ -1,3 +1,4 @@
+
 const roomNumberInput = document.getElementById('roomNumber');
 const classNameInput = document.getElementById('className');
 const bedCountInput = document.getElementById('bedCount');
@@ -28,8 +29,8 @@ function updateCalculations() {
     // Calculate vacant beds (prevent negative numbers)
     const vacantBeds = Math.max(0, bedCount - studentCount);
     
-    // Calculate total amount (400 per student)
-    const totalAmount = studentCount * 400;
+    // Calculate total amount (270 per student)
+    const totalAmount = studentCount * 270;
 
     // Update UI
     vacantBedsDisplay.textContent = vacantBeds;
@@ -50,7 +51,7 @@ function generateMessage(vacantBeds, totalAmount) {
 *Total Bed Count:* ${bedCount}
 *Student Count:* ${studentCount}
 *Vacant Beds:* ${vacantBeds}
-*Payable amount to the cashier:* ₹${totalAmount} (${studentCount} × ₹400)`;
+*Payable amount to the cashier:* ₹${totalAmount} (${studentCount} × ₹270)`;
 
     messagePreview.textContent = fullMessage;
     return fullMessage;
@@ -66,7 +67,7 @@ function shareToWhatsApp() {
     const bedCount = parseInt(bedCountInput.value) || 0;
     const studentCount = parseInt(studentCountInput.value) || 0;
     const vacantBeds = Math.max(0, bedCount - studentCount);
-    const totalAmount = studentCount * 400;
+    const totalAmount = studentCount * 270;
     
     const message = generateMessage(vacantBeds, totalAmount);
     const encodedMessage = encodeURIComponent(message);
