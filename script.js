@@ -50,7 +50,7 @@ function generateMessage(vacantBeds, totalAmount) {
 *Total Bed Count:* ${bedCount}
 *Student Count:* ${studentCount}
 *Vacant Beds:* ${vacantBeds}
-*Payable amount to the cashier:* ₹${totalAmount}`;
+*Payable amount to the cashier:* ₹${totalAmount} (${studentCount} × ₹400)`;
 
     messagePreview.textContent = fullMessage;
     return fullMessage;
@@ -75,11 +75,26 @@ function shareToWhatsApp() {
     window.open(whatsappUrl, '_blank');
 }
 
+// Helper to enforce integer-only inputs
+function enforceInteger(inputElement) {
+    // Prevent typing non-numeric characters commonly allowed in number fields
+    inputElement.addEventListener('keydown', function(e) {
+        if (['e', 'E', '+', '-', '.'].includes(e.key)) {
+            e.preventDefault();
+        }
+    });
+    // Remove any non-digit character that gets pasted or input
+    inputElement.addEventListener('input', function(e) {
+        this.value = this.value.replace(/[^0-9]/g, '');
+        updateCalculations();
+    });
+}
+
 // Event Listeners
-roomNumberInput.addEventListener('input', updateCalculations);
+enforceInteger(roomNumberInput);
 classNameInput.addEventListener('change', updateCalculations);
-bedCountInput.addEventListener('input', updateCalculations);
-studentCountInput.addEventListener('input', updateCalculations);
+enforceInteger(bedCountInput);
+enforceInteger(studentCountInput);
 
 whatsappBtn.addEventListener('click', (e) => {
     e.preventDefault(); // Prevent form submission
